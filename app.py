@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, jsonify
 from flask_pymongo import PyMongo
-# import scrape_craigslist
+import scrape_craigslist
 
 # Create an instance of Flask
 app = Flask(__name__)
@@ -29,11 +29,11 @@ def scrape():
     pets = mongo.db.pets
 
     # Example data
-    scraped_collection = [{'title': 'Dog'},
-                          {'title': 'Cat seeking home'},
-                          {'title': 'Chicken, potentially tasty'},
-                          {'title': 'Rabbit that walks like a man'}]
-    # result_data = scrape_craigslist.scrape_info()
+    # scraped_collection = [{'title': 'Dog'},
+    #                       {'title': 'Cat seeking home'},
+    #                       {'title': 'Chicken, potentially tasty'},
+    #                       {'title': 'Rabbit that walks like a man'}]
+    scraped_collection = scrape_craigslist.scrape_info('pet')
 
     # Update the Mongo database using update and upsert=True
     pets.insert_many(scraped_collection)
@@ -49,8 +49,13 @@ def json():
     pet_json = []
     for pet_datum in pet_data:
         pet_json.append({
-            'title': pet_datum['title']
-            })
+            'title': pet_datum['title'],
+            'image_urls': pet_datum['image_urls'],
+            'description': pet_datum['description'],
+            'coordinates': pet_datum['coordinates'],
+            'craiglist_url': pet_datum['craiglist_url'],
+            'time_posted': pet_datum['time_posted']
+        })
 
     # Redirect back to home page
     return jsonify(pet_json)
