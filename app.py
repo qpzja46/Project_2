@@ -10,10 +10,14 @@ mongo = PyMongo(app, uri="mongodb://localhost:27017/craigslist_app")
 
 # Route to render index.html template using data from Mongo
 @app.route("/")
-def home():
+def render_home():
     # Return template and data
     return render_template("index.html")
 
+@app.route("/map")
+def render_map():
+    # Return template and data
+    return render_template("map.html")
 
 # Route that will trigger the scrape function
 @app.route("/scrape")
