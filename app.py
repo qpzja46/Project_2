@@ -19,6 +19,12 @@ def render_map():
     # Return template and data
     return render_template("map.html")
 
+@app.route("/pet")
+def render_pet():
+    pet_data = mongo.db.pets.find_one()
+    # Return template and data
+    return render_template("pet.html", pet_data=pet_data)
+
 # Route that will trigger the scrape function
 @app.route("/scrape")
 def scrape():
