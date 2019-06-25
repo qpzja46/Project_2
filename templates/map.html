@@ -15,9 +15,28 @@
 
 <body>
   <!-- The div that holds our map -->
-  <h1> Map page</h1>
-  <div id="map-id"></div>
-\
+  <!-- <h1> Map page</h1> -->
+  <div id="map-id">
+  </div>
+  <div class="container">
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" href="#">Find Your Next Pet!</a>
+        <!-- <li class="nav-item active">
+        <a class="nav-link" href="/index">Home <span class="sr-only">(current)</span></a>
+        </li> -->
+        <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-lg">Large</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+              </div>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        </nav>
+    </div>
+
+
+
   <!-- Leaflet JavaScript -->
   <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
   <script src="https://d3js.org/d3.v5.min.js"></script>
