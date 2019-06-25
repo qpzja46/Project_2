@@ -45,8 +45,8 @@ def scrape():
     # Redirect back to home page
     return redirect("/")
 
-@app.route('/json/pets', defaults={'search_term': None})
-@app.route("/json/pets/<search_term>")
+@app.route('/pets', defaults={'search_term': None})
+@app.route("/pets/<search_term>")
 def json(search_term):
     if search_term:
         search_term = ' ' + search_term.lower()
