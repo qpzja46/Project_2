@@ -27,19 +27,35 @@
   }
 
   /* Container needed to position the button. Adjust the width as needed */
-.container {
+.card-body {
     position: relative;
-    width: 50%;
+    width: 100%;
   }
   
   /* Make the image responsive */
-  .container img {
+  /* .card-body .card-img {
     width: 100%;
     height: auto;
+  } */
+
+  .card-body .form-control {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  } 
+  .card-text-center.form-control2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
   }
   
+  .card-text-center .form-control {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
   /* Style the button and place it in the middle of the container/image */
-  .container .btn {
+  .card-text-center .btn  {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -52,8 +68,9 @@
     border: none;
     cursor: pointer;
     border-radius: 5px;
-  }
+   }
   
-  .container .btn:hover {
+  
+   .card-text-center .btn:hover {
     background-color: black;
   }
