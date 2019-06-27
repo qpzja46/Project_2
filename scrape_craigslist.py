@@ -1,9 +1,8 @@
-
 from splinter import Browser
 from bs4 import BeautifulSoup
 import requests
 
-def get_urls (search_topic):
+def get_urls (search_topic, end_url):
     executable_path = {"executable_path": "../chromedriver"}
     browser = Browser("chrome", **executable_path, headless=False)
 
@@ -20,7 +19,12 @@ def get_urls (search_topic):
     for current_page in range(1, end_page + 1):
         results = soup.find_all('li', class_='result-row')
         for result in results:
-            url_list.append(result.find('a')['href'])
+            link = result.find('a')['href']
+            if link != end_url:
+                url_list.append(link)
+            else:
+                current_page = end_page
+                break
 
         if current_page < end_page:
             browser.click_link_by_partial_text('next')
@@ -29,7 +33,6 @@ def get_urls (search_topic):
 
     browser.quit()
     return url_list
-
 
 def scrape_page(url):
     response = requests.get(url)
@@ -42,8 +45,7 @@ def scrape_page(url):
     for image in images:
         image_urls.append(image["href"])
 
-    description = soup.find("section", id = "postingbody").get_text()
-
+    description = soup.find("section", id = "postingbody").find('div').next_sibling[1:]
 
     latitude = soup.find("div", id= "map")["data-latitude"]
     longitude = soup.find("div", id ="map")["data-longitude"]
@@ -61,17 +63,12 @@ def scrape_page(url):
     }
     return listing
 
-
-def scrape_info(search_topic):
+def scrape_info(search_topic, end_url):
     scrape_data = []
-    url_list = get_urls(search_topic)
+    url_list = get_urls(search_topic, end_url)
     record_total = len(url_list)
     for n in range(0, record_total):
-        try:
-            scraped_page = scrape_page(url_list[n])
-            scrape_data.append(scraped_page)
-            print(f'Scraping Page {n} of {record_total}')
-        except TypeError:
-            print(f'Error with Page {n} of {record_total}')
+        scrape_data.append(scrape_page(url_list[n]))
+        print(f'Scraping Page {n} of {record_total}')
     return scrape_data
 
