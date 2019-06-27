@@ -28,16 +28,15 @@ def render_pet():
 # Route that will trigger the scrape function
 @app.route("/scrape")
 def scrape():
-
-    # Run the scrape function and save the results to a variable
     pets = mongo.db.pets
+    latest_pet = pets.find_one()
 
     # Example data
     # scraped_collection = [{'title': 'Dog'},
     #                       {'title': 'Cat seeking home'},
     #                       {'title': 'Chicken, potentially tasty'},
     #                       {'title': 'Rabbit that walks like a man'}]
-    scraped_collection = scrape_craigslist.scrape_info('pet')
+    scraped_collection = scrape_craigslist.scrape_info('pet', latest_pet['craiglist_url'])
 
     # Update the Mongo database using insert
     pets.insert_many(scraped_collection)
@@ -73,11 +72,12 @@ def json(search_term):
     return jsonify(pet_json)
 
 # Zipcode to lat-lon
-@app.route('/json/locations/<zipcode>')
+@app.route('/locations/<zipcode>')
 def zipcode_to_coordiantes(zipcode):
     location_data = mongo.db.zipcodes.find_one({'Zip': zipcode})
-    coordinates = {'latitude': float(location_data['Latitude']),
-                   'longitude': float(location_data['Longitude'])}
+    coordinates = {'coordinates': [float(location_data['Latitude']),
+                                   float(location_data['Longitude'])
+                                   ]}
     return jsonify(coordinates)
 
 if __name__ == "__main__":

@@ -68,7 +68,10 @@ def scrape_info(search_topic, end_url):
     url_list = get_urls(search_topic, end_url)
     record_total = len(url_list)
     for n in range(0, record_total):
-        scrape_data.append(scrape_page(url_list[n]))
-        print(f'Scraping Page {n} of {record_total}')
+        try:
+            scrape_data.append(scrape_page(url_list[n]))
+            print(f'Scraping Page {n} of {record_total}')
+        except:
+            print(f'Error with Page {n} of {record_total}')
     return scrape_data
 
