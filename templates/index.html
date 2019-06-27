@@ -2,6 +2,48 @@
 <html lang="en">
 
 <head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    .topnav {
+      overflow: hidden;
+      background-color: #333;
+    }
+    
+    .topnav a {
+      float: left;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+    
+    .topnav a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+    
+    .topnav a.active {
+      background-color: #4CAF50;
+      color: white;
+    }
+    </style>
+    </head>
+    <body>
+    
+    <div class="topnav">
+      <a class="active" href="#/">Home</a>
+      <a href="#news">News</a>
+      <a href="#contact">Contact</a>
+      <a href="#about">About</a>
+    </div>
+    
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -10,9 +52,18 @@
   <link rel="stylesheet" href="static/style.css">
 </head>
 
-<body>
+<div class="container">
+    <div class="card-body">
+        <div class="card bg-dark text-white">
+    <h1 class="card-title">Where Pets Find Their People</h1>
+    <p class="card-text">Thousands of adoptable pets are looking for people. People like you.</p>
+    <img src="static/pets_header.jpg" alt="Header image">
+    <button class="btn">Find Your Next Pet!</button>
+  </div>
+</div>
+</div>
   
-    <div class="card text-center">
+    <!-- <div class="card text-center">
 
         <div class="card-body">
             <div class="card bg-dark text-white">
@@ -29,17 +80,8 @@
         <div class="card-footer text-muted">
          
         </div>
-      </div>
-      <!-- <div class="input-group">
-          <input type="text" class="form-control" placeholder="Enter Zip code" aria-label="Enter Zipcode" aria-describedby="basic-addon2">
-          <input type="text" class="form-control" placeholder="What kind of pet are you looking for?(Dog,Cat, etc)" aria-label="User's Input" aria-describedby="button-addon2">
-          <div class="input-group-append">
-          <a href="/map" class="btn btn-primary">Find Your Next Pet!</a>
-            <button class="btn btn-outline-secondary" type="button">Dogs</button> 
-            <button class="btn btn-outline-secondary" type="button">Cats</button> 
-          </div>
-        </div>
-      -->
+      </div> -->
+
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="static/logic.js"></script>
 </body>
