@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, jsonify
-from flask_pymongo import PyMongo
+from flask_pymongo import PyMongo, ObjectId
 import scrape_craigslist
 
 # Create an instance of Flask
@@ -19,9 +19,11 @@ def render_map():
     # Return template and data
     return render_template("map.html")
 
-@app.route("/pet")
-def render_pet():
-    pet_data = mongo.db.pets.find_one()
+@app.route("/pet/<pet_id>")
+def render_pet(pet_id):
+    pet_id = ObjectId(pet_id)
+    pet_data = mongo.db.pets.find_one({'_id': pet_id})
+    print(pet_data['title'])
     # Return template and data
     return render_template("pet.html", pet_data=pet_data)
 
@@ -57,10 +59,12 @@ def json(search_term):
     pet_data = mongo.db.pets.find()
     pet_json = []
     for pet_datum in pet_data:
+        # print(pet_datum)
 
         # Filter the results 
         if (search_term in pet_datum['title'].lower()) or (search_term in pet_datum['description'].lower()):
             pet_json.append({
+                'id': str(pet_datum['_id']),
                 'title': pet_datum['title'],
                 'image_urls': pet_datum['image_urls'],
                 'description': pet_datum['description'],
