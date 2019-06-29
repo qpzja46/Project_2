@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/style.css">
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     </head>
@@ -25,6 +25,7 @@
     </div>
   
     <center> 
+    <div id=front-id style="display:block">
 
         <div class="card-body">
          
@@ -43,12 +44,19 @@
             <input class="input-field" type="text" placeholder="Kind of Pet" name="pet", id="searchterm">
           </div>
         
-          <a href="/map" id="submit"type="submit" class="btn">Find Your Next Pet! </button>
+          <button id="submit"type="submit" class="btn">Find Your Next Pet! </button>
         </form>
-    
-    
+    </div>
+  </center>
+  <div id="map-id" style="display:none"></div>
+
+  <!-- Leaflet JavaScript -->
+  <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+  <!-- API Key -->
+  <script type="text/javascript" src="../static/config.js"></script>
+  <!-- d3 library -->
   <script src="https://d3js.org/d3.v5.min.js"></script>
-  <script src="static/logic.js"></script>
+  <!-- our script -->
+  <script src="static/front.js"></script>  
 </body>
-</center>
 </html>
