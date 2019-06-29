@@ -23,7 +23,6 @@ def render_map():
 def render_pet(pet_id):
     pet_id = ObjectId(pet_id)
     pet_data = mongo.db.pets.find_one({'_id': pet_id})
-    print(pet_data['title'])
     # Return template and data
     return render_template("pet.html", pet_data=pet_data)
 
