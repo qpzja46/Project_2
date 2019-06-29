@@ -10,6 +10,10 @@
     <title>Craigslist Pet Finder</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/style.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     </head>
     <body>
     
@@ -48,15 +52,16 @@
         <form action="/action_page.php">
           
           <div class="input-container">
-            <i class="fa fa-user icon"></i>
-            <input class="input-field" type="text" placeholder="Enter Zipcode" name="zipcode" id="zipcode">
-          </div>
-        
-        
-          <div class="input-container">
-            <i class="fa fa-key icon"></i>
+            <i class="fas fa-map-marker-alt" style="font-size:48px;color:rgb(209, 110, 201)"></i>
+            <input class="input-field" type="text" placeholder="Enter Zipcode" name="zipcode" id="zipcode"> <i class="fas fa-paw" style="font-size:48px;color:rgb(209, 110, 201)"></i>
             <input class="input-field" type="text" placeholder="Kind of Pet" name="pet", id="searchterm">
           </div>
+        
+        
+          <!-- <div class="input-container">
+            <i class="fas fa-paw" style="font-size:48px;color:rgb(209, 110, 201)"></i>
+            <input class="input-field" type="text" placeholder="Kind of Pet" name="pet", id="searchterm">
+          </div> -->
         
           <a href="/map" id="submit"type="submit" class="btn">Find Your Next Pet! </button>
         </form>
