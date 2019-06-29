@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, jsonify
-from flask_pymongo import PyMongo, ObjectId
+from flask_pymongo import PyMongo, ObjectId, DESCENDING
 import scrape_craigslist
 
 # Create an instance of Flask
@@ -29,14 +29,11 @@ def render_pet(pet_id):
 # Route that will trigger the scrape function
 @app.route("/scrape")
 def scrape():
+    # Set up the mongo connection
     pets = mongo.db.pets
-    latest_pet = pets.find_one()
-
-    # Example data
-    # scraped_collection = [{'title': 'Dog'},
-    #                       {'title': 'Cat seeking home'},
-    #                       {'title': 'Chicken, potentially tasty'},
-    #                       {'title': 'Rabbit that walks like a man'}]
+    # Pull the most recent craigslist url so that the scraper knows when to stop
+    latest_pet = pets.find_one({}, sort=[("time_posted", DESCENDING)])
+    # Run the scraper using the keyword pet and the most recent url
     scraped_collection = scrape_craigslist.scrape_info('pet', latest_pet['craiglist_url'])
 
     # Update the Mongo database using insert
@@ -45,12 +42,15 @@ def scrape():
     # Redirect back to home page
     return redirect("/")
 
+# Route that will serve as a query-able API and link between our database and the javascript
 @app.route('/pets/', defaults={'search_term': None})
 @app.route("/pets/<search_term>")
 def json(search_term):
+    # Normalize the search term to lower case and add a space in front to cut down on words appearing within other words
     if search_term:
         search_term = ' ' + search_term.lower()
         # print(search_term)
+    # If there was no specified search term, create an empty string so the subsequent filter doesn't break
     else:
         search_term = ''
 
@@ -58,9 +58,8 @@ def json(search_term):
     pet_data = mongo.db.pets.find()
     pet_json = []
     for pet_datum in pet_data:
-        # print(pet_datum)
 
-        # Filter the results 
+        # Filter the results so only pets with the search term in their title or description are added to our list
         if (search_term in pet_datum['title'].lower()) or (search_term in pet_datum['description'].lower()):
             pet_json.append({
                 'id': str(pet_datum['_id']),
@@ -72,15 +71,24 @@ def json(search_term):
                 'time_posted': pet_datum['time_posted']
             })
 
+    # Output the filtered results as a json file
     return jsonify(pet_json)
 
-# Zipcode to lat-lon
+# Another API route that converts Zipcodes to lat-lon coordinates
+@app.route('/locations/', defaults={'zipcode': None})
 @app.route('/locations/<zipcode>')
 def zipcode_to_coordiantes(zipcode):
-    location_data = mongo.db.zipcodes.find_one({'Zip': zipcode})
-    coordinates = {'coordinates': [float(location_data['Latitude']),
-                                   float(location_data['Longitude'])
-                                   ]}
+    try:
+        location_data = mongo.db.zipcodes.find_one({'Zip': zipcode})
+        coordinates = {'coordinates': [float(location_data['Latitude']),
+                                    float(location_data['Longitude'])
+                                    ]}
+    
+    # If the user inputs an invalid zipcode, simply use the coordinates for the City of Chicago
+    except:
+        coordinates = {'coordinates': [41.8781, -87.6298]}
+
+    # Output results as json
     return jsonify(coordinates)
 
 if __name__ == "__main__":
