@@ -82,7 +82,7 @@ function createMarkers(pets, coordinates) {
 
       // For each station, create a marker and bind a popup with the station's name
       var petMarker = L.marker([pet.coordinates[0], pet.coordinates[1]])
-      .bindPopup("<h4><a href=/pet/" + pet.id + ">" + pet.title + "</a><h4>");
+      .bindPopup("<h4><a href=/pet/" + pet.id + " target='_blank'>" + pet.title + "</a><h4>");
 
       // Add the marker to the petMarkers array
       petMarkers.push(petMarker);
