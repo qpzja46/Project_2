@@ -2,41 +2,30 @@
 <html lang="en">
 
 <head>
-     
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Craigslist Pet Finder</title>
-   <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css">
-
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="static/style.css">
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
+    
 <body>
   <div class="topnav">
-      <a class="active" href="/">Home</a>
-      <a href="#news">News</a>
-      <a href="#contact">Contact</a>
-      <a href="#about">About</a>
+    <a class="active" href="/">Home</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
   </div>
 
- <!-- The div that holds our map -->
   <h1> {{ pet_data.title }} </h1>
   {{ pet_data.description }}
   <hr/>
   {{ pet_data.craiglist_url }}
   
-
-  <!-- Leaflet JavaScript -->
-  <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
-  <script src="https://d3js.org/d3.v5.min.js"></script>
-  <!-- API Key -->
-  <script type="text/javascript" src="../static/config.js"></script>
-  <!-- Our JavaScript -->
-  <script type="text/javascript" src="../static/logic.js"></script>
-
 </body>
 
 </html>

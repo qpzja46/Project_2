@@ -75,6 +75,7 @@ def json(search_term):
     return jsonify(pet_json)
 
 # Another API route that converts Zipcodes to lat-lon coordinates
+@app.route('/locations/', defaults={'zipcode': None})
 @app.route('/locations/<zipcode>')
 def zipcode_to_coordiantes(zipcode):
     try:
