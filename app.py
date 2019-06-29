@@ -32,10 +32,13 @@ def scrape():
     # Set up the mongo connection
     pets = mongo.db.pets
     # Pull the most recent craigslist url so that the scraper knows when to stop
-    latest_pet = pets.find_one({}, sort=[("time_posted", DESCENDING)])
-    # Run the scraper using the keyword pet and the most recent url
-    scraped_collection = scrape_craigslist.scrape_info('pet', latest_pet['craiglist_url'])
+    try:
+        latest_url = pets.find_one({}, sort=[("time_posted", DESCENDING)])['craiglist_url']    
+        # Run the scraper using the keyword pet and the most recent url
+    except TypeError:
+        latest_url = ''
 
+    scraped_collection = scrape_craigslist.scrape_info('pet', latest_url)
     # Update the Mongo database using insert
     pets.insert_many(scraped_collection)
     

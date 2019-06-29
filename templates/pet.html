@@ -62,8 +62,7 @@
   
 <div class="banner-section">
     <!-- Image should load within the following img tag -->
-    <img class="image_urls" alt="effy">
-    <img src="{{pet_data.image_urls[0]}}" />
+    <img class="image_urls" alt="effy"src="{{pet_data.image_urls[0]}}">
 </div>
 
   <!-- Leaflet JavaScript -->
@@ -84,7 +83,7 @@
         <a href="/map" class="btn btn-primary">Looking for someone else?</a>
       </div>
       <div class="card-footer text-muted">
-        Data From {{ pet_data.craiglist_url }}
+        Data From <a href='{{ pet_data.craiglist_url }}' target="_blank">Craigslist</a>
       </div>
     </div>
 
