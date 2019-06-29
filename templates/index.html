@@ -23,26 +23,47 @@
 
 
 
-
-  <center>
+    <center> 
+  
     <!-- <div class="card-text-center"> -->
 
         <div class="card-body">
          
                 <h1 class="card-title">Where Pets Find Their People</h1>
                 <p class="card-text">Thousands of adoptable pets are looking for people. People like you.</p>
-                
-                <img class="card-img" src="static/pets_header.jpg" alt="Header image">
+                <div class="imgbox">
+                  <img class="card-img" src="static/pets_header.jpg" alt="Header image">
+                </div>
         </div>
-        <input type="text" class="form-control" placeholder="Enter Zip code" aria-label="Enter Zipcode" aria-describedby="basic-addon2"id="zipcode">
-        <input type="text" class="form-control2" placeholder="What kind of pet are you looking for? (Dog,Cat,Fish, etc)" aria-label="User's Input" aria-describedby="button-addon2"id="searchterm">
+       
+        <!-- <div class="Forms">
+            <input type="text" class="form-control" placeholder="Enter Zip code" aria-label="Enter Zipcode" aria-describedby="basic-addon2"id="zipcode">
+            <input type="text" class="form-control2" placeholder="What kind of pet are you looking for? (Dog,Cat,Fish, etc)" aria-label="User's Input" aria-describedby="button-addon2"id="searchterm">
+            
+        </div>
+      
+      
         
-        <a href="/map" id="submit" class="btn">Find Your Next Pet! </a>
-     <!-- </div> -->
+        <a href="/map" id="submit" class="btn">Find Your Next Pet! </a> -->
+        <form action="/action_page.php">
+          
+          <div class="input-container">
+            <i class="fa fa-user icon"></i>
+            <input class="input-field" type="text" placeholder="Enter Zipcode" name="zipcode" id="zipcode">
+          </div>
+        
+        
+          <div class="input-container">
+            <i class="fa fa-key icon"></i>
+            <input class="input-field" type="text" placeholder="Kind of Pet" name="pet", id="searchterm">
+          </div>
+        
+          <a href="/map" id="submit"type="submit" class="btn">Find Your Next Pet! </button>
+        </form>
     
-    </center>
+    
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="static/logic.js"></script>
 </body>
-
+</center>
 </html>
